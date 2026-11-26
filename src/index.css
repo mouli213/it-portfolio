@@ -1,0 +1,348 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Fraunces", Georgia, Cambria, "Times New Roman", serif;
+  --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+/* =========================================================
+   THEME 1 (DEFAULT): Subtle Elegance — Obsidian & Mahogany
+   Inspired by #020403, #5F2E1B, #1A2324, #141413
+   ========================================================= */
+:root,
+[data-theme="dark"] {
+  color-scheme: dark;
+  --bg-void: #020403;
+  --bg-carbon: #141413;
+  --bg-slate: #1A2324;
+  --bg-slate-deep: #0D1212;
+  --bg-card: rgba(20, 20, 19, 0.9);
+  --bg-card-elevated: rgba(26, 35, 36, 0.84);
+  --bg-recessed: #090C0B;
+  --bg-glass: rgba(20, 20, 19, 0.78);
+
+  --accent-primary: #5F2E1B;
+  --accent-primary-hover: #793B23;
+  --accent-glow: #C8734B;
+  --accent-soft: #E5A483;
+  --accent-contrast-text: #F7F3EE;
+  --accent-secondary: #263638;
+  --accent-secondary-bright: #5DA5AA;
+
+  --text-main: #F4F1EC;
+  --text-secondary: #BCC3C1;
+  --text-muted: #848E8B;
+
+  --border-subtle: rgba(255, 255, 255, 0.09);
+  --border-strong: rgba(200, 115, 75, 0.36);
+  --border-slate: rgba(93, 165, 170, 0.22);
+
+  --grid-line: rgba(255, 255, 255, 0.035);
+  --grid-accent: rgba(200, 115, 75, 0.08);
+  --sheen-color: rgba(229, 164, 131, 0.16);
+  --sheen-secondary: rgba(93, 165, 170, 0.1);
+
+  --shadow-3d-rest:
+    0 24px 50px -18px rgba(0, 0, 0, 0.85),
+    0 8px 22px -10px rgba(95, 46, 27, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  --shadow-3d-hover:
+    0 36px 74px -16px rgba(0, 0, 0, 0.92),
+    0 16px 38px -10px rgba(200, 115, 75, 0.28),
+    inset 0 1px 0 rgba(229, 164, 131, 0.22);
+  --shadow-3d-stage:
+    0 36px 90px -24px rgba(0, 0, 0, 0.95),
+    0 0 60px -18px rgba(95, 46, 27, 0.38),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* =========================================================
+   THEME 2 (OPPOSITE): Porcelain & Cool Cerulean-Teal
+   Exact inverse polarity of #020403, #5F2E1B, #1A2324, #141413
+   ========================================================= */
+[data-theme="light"] {
+  color-scheme: light;
+  --bg-void: #F7F9F9;
+  --bg-carbon: #FFFFFF;
+  --bg-slate: #E4ECEC;
+  --bg-slate-deep: #EDF2F2;
+  --bg-card: rgba(255, 255, 255, 0.92);
+  --bg-card-elevated: rgba(228, 236, 236, 0.86);
+  --bg-recessed: #EEF3F3;
+  --bg-glass: rgba(255, 255, 255, 0.82);
+
+  --accent-primary: #1B4C5F;
+  --accent-primary-hover: #143A49;
+  --accent-glow: #1E6D8A;
+  --accent-soft: #13485C;
+  --accent-contrast-text: #FFFFFF;
+  --accent-secondary: #D4E1E2;
+  --accent-secondary-bright: #9E4F30;
+
+  --text-main: #0D1415;
+  --text-secondary: #394648;
+  --text-muted: #5F6E70;
+
+  --border-subtle: rgba(26, 35, 36, 0.12);
+  --border-strong: rgba(27, 76, 95, 0.35);
+  --border-slate: rgba(158, 79, 48, 0.22);
+
+  --grid-line: rgba(26, 35, 36, 0.045);
+  --grid-accent: rgba(27, 76, 95, 0.08);
+  --sheen-color: rgba(255, 255, 255, 0.78);
+  --sheen-secondary: rgba(27, 76, 95, 0.09);
+
+  --shadow-3d-rest:
+    0 22px 46px -18px rgba(13, 20, 21, 0.16),
+    0 8px 20px -10px rgba(27, 76, 95, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  --shadow-3d-hover:
+    0 34px 66px -16px rgba(13, 20, 21, 0.24),
+    0 14px 32px -10px rgba(27, 76, 95, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 1);
+  --shadow-3d-stage:
+    0 32px 76px -24px rgba(13, 20, 21, 0.22),
+    0 0 50px -16px rgba(27, 76, 95, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    scroll-padding-top: 5.5rem;
+    background-color: var(--bg-void);
+    color: var(--text-main);
+  }
+
+  body {
+    background-color: var(--bg-void);
+    color: var(--text-main);
+    transition: background-color 0.4s ease, color 0.4s ease;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background-color: var(--accent-primary);
+    color: var(--accent-contrast-text);
+  }
+
+  h1, h2, h3, .font-display {
+    font-family: var(--font-serif);
+  }
+}
+
+/* Architectural 3D grid & radial depth backdrop */
+.studio-grid-bg {
+  background-color: var(--bg-void);
+  background-image:
+    radial-gradient(ellipse 80% 55% at 75% 15%, var(--grid-accent), transparent 65%),
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  background-size: 100% 100%, 44px 44px, 44px 44px;
+}
+
+/* 3D Perspective floor horizon inside sections */
+.perspective-floor {
+  position: absolute;
+  inset: auto -10% -35% -10%;
+  height: 260px;
+  background-image:
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  background-size: 46px 46px;
+  transform: perspective(650px) rotateX(68deg);
+  transform-origin: center top;
+  mask-image: radial-gradient(ellipse 70% 80% at 50% 25%, black, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 80% at 50% 25%, black, transparent 80%);
+  pointer-events: none;
+}
+
+/* 3D Depth card utilities */
+.perspective-stage {
+  perspective: 1400px;
+  transform-style: preserve-3d;
+}
+
+.card-3d {
+  transform-style: preserve-3d;
+  box-shadow: var(--shadow-3d-rest);
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.25s ease,
+    background-color 0.35s ease;
+}
+
+.card-3d:hover {
+  box-shadow: var(--shadow-3d-hover);
+}
+
+/* Child Z-extrusion layers inside preserve-3d cards */
+.depth-z-sm {
+  transform: translateZ(14px);
+}
+
+.depth-z-md {
+  transform: translateZ(24px);
+}
+
+.depth-z-lg {
+  transform: translateZ(36px);
+}
+
+/* Extruded 3D tactile button edge */
+.btn-3d {
+  box-shadow:
+    0 10px 22px -8px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.btn-3d:hover {
+  transform: translateY(-2px) translateZ(8px);
+}
+
+.btn-3d:active {
+  transform: translateY(1px);
+}
+
+/* =========================================================
+   Futuristic Circular Portrait Motion Animations
+   ========================================================= */
+@keyframes orbitSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes orbitSpinReverse {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes holoPulse {
+  0%, 100% {
+    transform: scale(0.96);
+    opacity: 0.48;
+  }
+  50% {
+    transform: scale(1.06);
+    opacity: 0.85;
+  }
+}
+
+@keyframes scanSweep {
+  0% {
+    transform: translateY(-130%) rotate(-18deg);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.55;
+  }
+  55% {
+    opacity: 0.35;
+  }
+  100% {
+    transform: translateY(160%) rotate(-18deg);
+    opacity: 0;
+  }
+}
+
+@keyframes float3D {
+  0%, 100% {
+    transform: translateY(0px) rotateX(0deg);
+  }
+  50% {
+    transform: translateY(-7px) rotateX(2deg);
+  }
+}
+
+@keyframes pulseRing {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(200, 115, 75, 0.45);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(200, 115, 75, 0);
+  }
+}
+
+[data-theme="light"] .animate-pulse-ring {
+  animation-name: pulseRingLight;
+}
+
+@keyframes pulseRingLight {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(27, 76, 95, 0.38);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(27, 76, 95, 0);
+  }
+}
+
+.animate-orbit-slow {
+  animation: orbitSpin 16s linear infinite;
+}
+
+.animate-orbit-fast {
+  animation: orbitSpin 9s linear infinite;
+}
+
+.animate-orbit-reverse {
+  animation: orbitSpinReverse 12s linear infinite;
+}
+
+.animate-holo-pulse {
+  animation: holoPulse 3.6s ease-in-out infinite;
+}
+
+.animate-scan-sweep {
+  animation: scanSweep 4.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.animate-float-3d {
+  animation: float3D 5s ease-in-out infinite;
+}
+
+.animate-pulse-ring {
+  animation: pulseRing 2.6s ease-in-out infinite;
+}
+
+/* Organized scroll reveal animations with 3D perspective lift */
+.reveal-base {
+  opacity: 0;
+  transform: perspective(1000px) translateY(28px) rotateX(6deg) scale(0.97);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: perspective(1000px) translateY(0) rotateX(0deg) scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-base {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .animate-orbit-slow,
+  .animate-orbit-fast,
+  .animate-orbit-reverse,
+  .animate-holo-pulse,
+  .animate-scan-sweep,
+  .animate-float-3d,
+  .animate-pulse-ring {
+    animation: none;
+  }
+}
